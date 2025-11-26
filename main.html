@@ -1,13 +1,49 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style></style>
   </head>
-
   <body>
-    <!-- write the body here -->
-
-    <script type="text/javascript" src="./script.js"></script>
+    <form>
+      <fieldset>
+        <legend>Web Form</legend>
+        <div class="age-div">
+          <label for="age">Age</label>
+          <input type="number" name="age" id="age" />
+        </div>
+        <div class="name-div">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" />
+        </div>
+        <button id="btn" type="submit">Submit</button>
+      </fieldset>
+    </form>
+    <script src="script.js"></script>
+    <script>
+      const form = document.querySelector("form");
+      const name = document.getElementById("name");
+      const ageElement = document.getElementById("age");
+      form.addEventListener("submit", (evt) => {
+        evt.preventDefault();
+        const validName = name.value.replace(/[^a-zA-Z]/g, "");
+        if (validName === "") {
+          alert("Please enter valid details.");
+          return;
+        }
+        const age = Number(ageElement.value);
+        if (age) {
+          new Promise((resolve, reject) => {
+            if (age > 18) setTimeout(() => resolve("Welcome, . You can vote."), 4000);
+            else setTimeout(() => reject("Oh sorry . You aren't old enough."), 4000);
+          })
+            .then((value) => alert(value))
+            .catch((reason) => alert(reason));
+        } else alert("Please enter valid details.");
+      });
+    </script>
   </body>
 </html>
